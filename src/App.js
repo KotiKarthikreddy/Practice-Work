@@ -37,7 +37,7 @@ const Login = () => {
               pattern: new RegExp(
                 "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
               ),
-              message:"You should have a Uppercase,LowerCase,symbol,number"
+              message:"You should have a Uppercase,LowerCase,symgjhjghkhdmbol,number"
             },
           ]}
         >
