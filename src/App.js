@@ -15,7 +15,6 @@ const Login = () => {
   };
 
   return (
-    // <div>
     <Row>
       <Col span={8} offset={8}>
         <Card style={{ marginTop: "30%", backgroundColor: "lightgreen", paddingInline:"10%" }}>
@@ -51,18 +50,18 @@ const Login = () => {
               label="Password"
               name="password"
               rules={[
-                { required: true, message: "Please input your Password!" },
+                { required: true, message: "Please Input Your Password!" },
 
                 {
                   pattern: new RegExp(
                     "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
                   ),
                   message:
-                    "You should have a Uppercase,LowerCase,Symbol,number",
+                    "You Should Have a Uppercase,LowerCase,Symbol,Number",
                 },
               ]}
             >
-              <Input
+              <Input.Password
                 style={{padding: "8px 8px" }}
               />
             </Form.Item>
@@ -70,8 +69,7 @@ const Login = () => {
               <Button
                 htmlType="submit"
                 style={{
-                  backgroundColor: "yellow",
-                  // marginLeft: "25%",
+                  backgroundColor: "Orange",
                   marginTop: "20px",
                 }}
               >
@@ -82,7 +80,6 @@ const Login = () => {
         </Card>
       </Col>
     </Row>
-    // </div>
   );
 };
 export default Login;
