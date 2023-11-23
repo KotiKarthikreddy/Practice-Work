@@ -3,13 +3,7 @@ import { Button, Form ,Row,Col,Card, Input, Typography} from 'antd';
 import axios from 'axios';
 
 const Login = () => {
-  const onFinish = async (values) => {
-    try {
-      const response = await axios.post("https://dev.sitara.cc/api/smb/user/login", values);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <div>
