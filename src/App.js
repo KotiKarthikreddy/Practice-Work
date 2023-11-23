@@ -1,15 +1,18 @@
 import React from 'react'
-import { Button, Form ,Row,Col,Card, Input, Typography} from 'antd';
+import { Button, Form ,Row,Col,Card, Input, Typography, message} from 'antd';
 import axios from 'axios';
 
 const Login = () => {
-  const onFinish = async (values) => {
-    try {
-      const res = await axios.post("https://dev.sitara.cc/api/smb/user/login", values);
-    } catch (error) {
-      console.log(error);
-    }
+  const onFinish = (values) => {
+    axios.post("https://dev.sitara.cc/api/smb/user/login", values)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+  
 
   return (
     <div>
@@ -28,13 +31,13 @@ const Login = () => {
               <Input style={{width:"70%",height:"auto",padding:"8px 8px"}}/>
               </Form.Item>
               <Form.Item label="Password" name="password"   rules={[
-            { required: true, message: "Please input your Password!" },
+            { required: true, 
+              message: "Please input your Password!" },
             {
-              message:
-                "It should have a uppercase , lowercase  numbers, symbol",
               pattern: new RegExp(
-                "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
               ),
+              message:"You should have a Uppercase,LowerCase,symbol,number"
             },
           ]}
         >
