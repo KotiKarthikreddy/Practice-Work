@@ -1,23 +1,38 @@
 import React from "react";
-import { Button, Form, Row, Col, Card, Input, Typography, message } from "antd";
+import { Button, Form, Row, Col, Card, Input, Typography } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const onFinish = (values) => {
-    axios
-      .post("https://dev.sitara.cc/api/smb/user/login", values)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(
+        "https://dev.sitara.cc/api/smb/user/login",
+        values
+      );
+      const accesstoken = response?.data?.data?.access_token;
+      const refreshToken = response?.data?.data?.refresh_token;
+      localStorage.setItem("accesstoken", accesstoken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <Row>
       <Col span={8} offset={8}>
-        <Card style={{ marginTop: "30%", backgroundColor: "lightgreen", paddingInline:"10%" }}>
+        <Card
+          style={{
+            marginTop: "30%",
+            backgroundColor: "lightgreen",
+            paddingInline: "10%",
+          }}
+        >
           <Typography
             style={{ fontWeight: "600", fontSize: "24px", textAlign: "center" }}
           >
@@ -42,9 +57,7 @@ const Login = () => {
                 },
               ]}
             >
-              <Input
-                style={{ padding: "8px 8px" }}
-              />
+              <Input style={{ padding: "8px 8px" }} autoComplete="off" />
             </Form.Item>
             <Form.Item
               label="Password"
@@ -61,11 +74,9 @@ const Login = () => {
                 },
               ]}
             >
-              <Input.Password
-                style={{padding: "8px 8px" }}
-              />
+              <Input.Password style={{ padding: "8px 8px" }} />
             </Form.Item>
-            <Form.Item style={{textAlign:"center"}}>
+            <Form.Item>
               <Button
                 htmlType="submit"
                 style={{
