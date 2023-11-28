@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  console.log(process.env.REACT_APP_PUBLIC_API_BASE_URL);
+  
 
   const onFinish = async (values) => {
     try {
