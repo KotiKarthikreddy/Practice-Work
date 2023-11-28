@@ -5,15 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  console.log(process.env.REACT_APP_PUBLIC_API_BASE_URL);
 
   const onFinish = async (values) => {
     try {
+      
       const response = await axios.post(
-        "https://dev.sitara.cc/api/smb/user/login",
+        `${process.env.REACT_APP_PUBLIC_API_BASE_URL}smb/user/login`,
         values
       );
-      const accesstoken = response?.data?.data?.access_token;
-      const refreshToken = response?.data?.data?.refresh_token;
+      
+      const data=response?.data?.data
+      const accesstoken = data?.access_token;
+      const refreshToken = data?.refresh_token;
       localStorage.setItem("accesstoken", accesstoken);
       localStorage.setItem("refreshToken", refreshToken);
 

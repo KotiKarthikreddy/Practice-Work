@@ -1,19 +1,19 @@
 import { Card, Empty, Typography, theme } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import "./Apps.css";
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [organizationIds, setOrganizationIds] = useState([]);
-  const AccessToken = localStorage.getItem("accesstoken");
+  const accessToken = localStorage.getItem("accesstoken");
 
   const userMetaData = async () => {
     try {
       const res = await axios.get(
-        "https://dev.sitara.cc/api/smb/user/details",
+        `${process.env.REACT_APP_PUBLIC_API_BASE_URL}smb/user/details`,
         {
           headers: {
-            Authorization: `Bearer ${AccessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
@@ -27,22 +27,14 @@ const Dashboard = () => {
     } catch (error) {
       console.log(error);
     }
-  };  
+  };
 
   useEffect(() => {
     userMetaData();
   }, []);
 
   return (
-    <Card
-      style={{
-        width: "20%",
-        height: "auto",
-        margin: "auto",
-        marginTop: "15%",
-        backgroundColor: "skyblue",
-      }}
-    >
+    <Card className="card">
       {userData ? (
         <div>
           <Typography>Name: {userData.first_name}</Typography>
